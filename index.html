@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Do It You Lazy Motherfucker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              dark: {
+                900: '#0a0a0a',
+                800: '#121212',
+                700: '#1a1a1a',
+                600: '#2a2a2a',
+                500: '#3a3a3a',
+              },
+              primary: {
+                DEFAULT: '#6366f1',
+                hover: '#4f46e5',
+                light: '#818cf8',
+              },
+              secondary: {
+                DEFAULT: '#ec4899',
+                hover: '#db2777',
+              },
+              success: {
+                DEFAULT: '#10b981',
+                hover: '#059669',
+              },
+              warning: {
+                DEFAULT: '#f59e0b',
+                hover: '#d97706',
+              },
+              danger: {
+                DEFAULT: '#ef4444',
+                hover: '#dc2626',
+              },
+              gradient: {
+                start: '#6366f1',
+                middle: '#8b5cf6',
+                end: '#ec4899',
+              }
+            },
+            fontFamily: {
+              'poppins': ['Poppins', 'sans-serif'],
+            },
+            boxShadow: {
+              'glass': '0 8px 32px rgba(0, 0, 0, 0.3)',
+              'card': '0 10px 40px rgba(0, 0, 0, 0.4)',
+              'inner-glow': 'inset 0 0 20px rgba(99, 102, 241, 0.1)',
+              'glow': '0 0 30px rgba(99, 102, 241, 0.3)',
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            },
+            animation: {
+              'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+              'float': 'float 3s ease-in-out infinite',
+              'gradient-shift': 'gradient-shift 5s ease infinite',
+            },
+            keyframes: {
+              'pulse-glow': {
+                '0%, 100%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.5)' },
+                '50%': { boxShadow: '0 0 40px rgba(99, 102, 241, 0.8)' }
+              },
+              'float': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' }
+              },
+              'gradient-shift': {
+                '0%, 100%': { backgroundPosition: '0% 50%' },
+                '50%': { backgroundPosition: '100% 50%' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      .glass-effect {
+        background: rgba(18, 18, 18, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      .glass-effect-light {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
+      .gradient-text {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .gradient-bg {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        background-size: 200% 200%;
+        animation: gradient-shift 5s ease infinite;
+      }
+      
+      .checked-cell {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .checked-cell::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
+        z-index: 1;
+      }
+      
+      .checked-cell::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        color: white;
+        font-size: 1.2rem;
+        z-index: 2;
+      }
+      
+      .theme-light {
+        background-color: #f8fafc;
+        color: #0f172a;
+      }
+      
+      .theme-dark {
+        background-color: #0a0a0a;
+        color: #f8fafc;
+      }
+      
+      .floating-action {
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      .workout-complete {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      
+    </style>
+  </head>
+  <body class="theme-dark min-h-screen font-poppins bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900">
+    <div class="container mx-auto px-4 py-6 md:py-8 max-w-7xl">
+      <!-- Header with Theme Toggle -->
+      <header class="mb-8 md:mb-12">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-4">
+            <div href="index.html" class="group">
+              <div class="flex items-center justify-center w-12 h-12 glass-effect rounded-2xl transition-all duration-300 group-hover:bg-gradient-to-br from-primary to-secondary group-hover:shadow-glow">
+                <i class="fas fa-dumbbell text-xl transform transition-transform duration-300 group-hover:scale-110"></i>
+              </div>
+            </div>
+            <div>
+              <h1 class="text-3xl md:text-4xl font-black tracking-tighter gradient-text">Do It You Lazy Motherfucker</h1>
+            </div>
+          </div>
+          
+          <!-- Theme Toggle -->
+          <div class="flex items-center gap-4">
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
+        <!-- Timer Section -->
+        <section>
+          <div class="glass-effect rounded-3xl p-6 md:p-8 shadow-card">
+            <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+              <!-- Timer Display -->
+              <div class="flex-1 text-center lg:text-center">
+                <div class="flex items-center justify-center lg:justify-start gap-3 mb-6">
+                  <div class="w-3 h-8 gradient-bg rounded-full"></div>
+                  <h2 class="text-xl font-bold">TIMER</h2>
+                </div>
+                
+                <div class="relative mb-8">
+                  <div id="timer-display" class="text-7xl md:text-7xl lg:text-8xl font-black mb-2 tracking-tighter gradient-text">
+                    00:00:00
+                  </div>
+                  <div class="text-gray-400 text-sm">Total workout time</div>
+                </div>
+                
+                <!-- Timer Controls -->
+                <div class="flex flex-wrap gap-4 justify-center lg:justify-center">
+                  <button id="start-btn" class="px-8 py-4 bg-gradient-to-r from-primary to-primary-light text-white font-bold rounded-xl transition-all duration-300 hover:shadow-glow hover:scale-105 flex items-center gap-3">
+                    <i class="fas fa-play"></i>
+                    <span>Start Timer</span>
+                  </button>
+                  <button id="stop-btn" class="px-8 py-4 glass-effect text-white font-bold rounded-xl transition-all duration-300 hover:bg-danger/20 hover:shadow-lg hover:scale-105 flex items-center gap-3">
+                    <i class="fas fa-pause"></i>
+                    <span>Pause</span>
+                  </button>
+                  <button id="reset-btn" class="px-8 py-4 glass-effect text-gray-300 font-bold rounded-xl transition-all duration-300 hover:bg-gray-700 hover:shadow-lg hover:scale-105 flex items-center gap-3">
+                    <i class="fas fa-redo"></i>
+                    <span>Reset</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Calendar Section -->
+        <section>
+          <div class="glass-effect rounded-3xl overflow-hidden shadow-card">
+            <!-- Calendar Header -->
+            <div class="bg-gradient-to-r from-dark-700 to-dark-800 px-6 py-5 flex items-center justify-between">
+              <button id="prev-month" class="p-3 hover:bg-dark-600 rounded-xl transition-all duration-300 hover:scale-110">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="text-center">
+                <h2 id="month-name" class="text-xl font-bold">October</h2>
+                <p id="year-display" class="text-sm text-gray-400">2023</p>
+              </div>
+              <button id="next-month" class="p-3 hover:bg-dark-600 rounded-xl transition-all duration-300 hover:scale-110">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            
+            <!-- Calendar Table -->
+            <div class="p-6">
+              <div class="overflow-x-auto">
+                <table id="calendar-table" class="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800"></th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PUSH</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PULL</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">LEGS</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">REST</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PUSH</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PULL</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">REST</th>
+                    </tr>
+                  </thead>
+                  <tbody id="calendar-body">
+                    <!-- Weeks will be populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+              
+              <!-- Calendar Summary -->
+              <div class="mt-6 pt-6 border-t border-dark-600">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-sm text-gray-400">Monthly Completion</p>
+                    <p id="completion-percentage" class="text-2xl font-bold gradient-text">0%</p>
+                  </div>
+                  <button id="mark-all-week" class="px-4 py-2 bg-gradient-to-r from-success to-success/80 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300">
+                    <i class="fas fa-check-circle mr-2"></i>Mark This Week
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Workout Library Section -->
+        <section>
+          <div class="glass-effect rounded-3xl p-6 shadow-card h-full flex flex-col">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-3 h-8 gradient-bg rounded-full"></div>
+              <h2 class="text-xl font-bold">WORKOUT LIBRARY</h2>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex flex-wrap gap-2 mb-8">
+              <button class="tab px-5 py-3 rounded-xl border border-dark-500 font-bold transition-all duration-300 hover:scale-105 data-[active=true]:bg-gradient-to-r data-[active=true]:from-primary data-[active=true]:to-secondary data-[active=true]:text-white data-[active=true]:border-transparent" data-type="push" data-active="true">
+                <i class="fas fa-arrow-up mr-2"></i>PUSH
+              </button>
+              <button class="tab px-5 py-3 rounded-xl border border-dark-500 font-bold transition-all duration-300 hover:scale-105 data-[active=true]:bg-gradient-to-r data-[active=true]:from-primary data-[active=true]:to-secondary data-[active=true]:text-white data-[active=true]:border-transparent" data-type="pull">
+                <i class="fas fa-arrow-down mr-2"></i>PULL
+              </button>
+              <button class="tab px-5 py-3 rounded-xl border border-dark-500 font-bold transition-all duration-300 hover:scale-105 data-[active=true]:bg-gradient-to-r data-[active=true]:from-primary data-[active=true]:to-secondary data-[active=true]:text-white data-[active=true]:border-transparent" data-type="legs">
+                <i class="fas fa-walking mr-2"></i>LEGS
+              </button>
+            </div>
+            
+            <!-- Exercise Card -->
+            <div class="flex-1 flex flex-col">
+              <div class="bg-gradient-to-br from-dark-800 to-dark-900 rounded-2xl p-8 flex items-center justify-between shadow-inner mb-6">
+                <button class="prev p-4 hover:bg-dark-700 rounded-xl transition-all duration-300 hover:scale-110">
+                  <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                
+                <div class="text-center flex-1">
+                  <p class="text-sm font-medium text-gray-400 mb-2">CURRENT EXERCISE</p>
+                  <div id="exercise-name" class="text-3xl font-bold mb-2">Bench Press</div>
+                  <div class="text-gray-400">
+                    <span class="mr-4"><i class="fas fa-dumbbell mr-1"></i>3 sets</span>
+                    <span><i class="fas fa-redo mr-1"></i>8-12 reps</span>
+                  </div>
+                </div>
+                
+                <button class="next p-4 hover:bg-dark-700 rounded-xl transition-all duration-300 hover:scale-110">
+                  <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+              </div>
+              
+              <!-- Exercise Details -->
+              <div class="glass-effect rounded-2xl p-5 mb-6">
+                <h3 class="font-bold mb-4">Exercise Details</h3>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p class="text-2xl font-bold gradient-text" id="current-set">1</p>
+                    <p class="text-xs text-gray-400">Current Set</p>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold gradient-text" id="target-reps">12</p>
+                    <p class="text-xs text-gray-400">Target Reps</p>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold gradient-text" id="rest-time">90s</p>
+                    <p class="text-xs text-gray-400">Rest Time</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Progress & Controls -->
+              <div class="mt-auto">
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex gap-2" id="progress-dots">
+                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                    <div class="w-3 h-3 rounded-full bg-dark-600"></div>
+                    <div class="w-3 h-3 rounded-full bg-dark-600"></div>
+                    <div class="w-3 h-3 rounded-full bg-dark-600"></div>
+                    <div class="w-3 h-3 rounded-full bg-dark-600"></div>
+                  </div>
+                  <button id="complete-exercise" class="px-4 py-2 bg-gradient-to-r from-success to-success/80 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300">
+                    <i class="fas fa-check mr-2"></i>Mark Complete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Floating Action Button -->
+      <button id="quick-start-btn" class="floating-action fixed bottom-6 right-6 w-16 h-16 gradient-bg rounded-full shadow-glow flex items-center justify-center hover:scale-110 transition-all duration-300 z-50">
+        <i class="fas fa-bolt text-xl"></i>
+      </button>
+
+      <!-- Notification Toast -->
+      <div id="toast" class="fixed top-6 right-6 glass-effect rounded-xl p-4 shadow-card transform translate-x-full transition-transform duration-300 z-50 max-w-sm">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div>
+            <h4 class="font-bold" id="toast-title">Workout Complete!</h4>
+            <p id="toast-message" class="text-sm text-gray-400">Great job! You've completed your push workout.</p>
+          </div>
+          <button class="close-toast ml-auto text-gray-400 hover:text-white">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="workout.js"></script>
+  </body>
+</html>
