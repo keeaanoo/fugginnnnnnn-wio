@@ -140,20 +140,15 @@ function generateCalendar() {
     for (let day = 1; day <= 7; day++) {
       const dayNumber = (week - 1) * 7 + day;
       
-      if (day === 4 || day === 7) {
-        // Rest days
-        weekHTML += `<td class="p-4 text-center bg-dark-900 border-dark-900">
-          <div class="text-gray-500">
-            <i class="fas fa-bed"></i>
-          </div>
-        </td>`;
-      } else if (dayNumber <= 28) {
+      if (day === 1 || day === 3 || day === 5) {
         // Workout days
-        const workoutTypes = ['PUSH', 'PULL', 'LEGS', 'PUSH', 'PULL'];
-        const workoutType = workoutTypes[(dayNumber - 1) % 5];
-        const icon = workoutType === 'PUSH' ? 'fa-arrow-up' : 
+        let workoutType;
+        if (day === 1) workoutType = 'PUSH';
+        else if (day === 3) workoutType = 'PULL';
+        else workoutType = 'LEGS';
+        const icon = workoutType === 'PUSH' ? 'fa-arrow-up' :
                     workoutType === 'PULL' ? 'fa-arrow-down' : 'fa-walking';
-        
+
         weekHTML += `
           <td class="calendar-cell p-4 text-center bg-dark-800 border border-dark-600 hover:bg-dark-700 transition-all duration-200 cursor-pointer"
               data-day="${dayNumber}" data-type="${workoutType.toLowerCase()}">
@@ -161,6 +156,13 @@ function generateCalendar() {
             <div class="text-gray-500 mt-1">
             </div>
           </td>`;
+      } else if (dayNumber <= 28) {
+        // Rest days
+        weekHTML += `<td class="p-4 text-center bg-dark-900 border-dark-900">
+          <div class="text-gray-500">
+            <i class="fas fa-bed"></i>
+          </div>
+        </td>`;
       } else {
         weekHTML += `<td class="p-4 text-center bg-dark-900 border border-dark-900"></td>`;
       }
@@ -271,24 +273,26 @@ function markCurrentWeek() {
 // === WORKOUT LIBRARY ===
 const exercises = {
   push: [
-    { name: "Bench Press", sets: 3, reps: "8-12", rest: "90s" },
-    { name: "Shoulder Press", sets: 3, reps: "8-12", rest: "90s" },
+    { name: "Bench Press", sets: 4, reps: "6-10", rest: "120s" },
+    { name: "Shoulder Press", sets: 3, reps: "8-10", rest: "120s" },
     { name: "Lateral Raise", sets: 4, reps: "12-15", rest: "60s" },
-    { name: "Chest Fly", sets: 3, reps: "10-15", rest: "75s" },
+    { name: "Chest Fly", sets: 3, reps: "10-12", rest: "90s" },
     { name: "Overhead Extension", sets: 3, reps: "10-12", rest: "90s" }
   ],
+
   pull: [
-    { name: "Pull-Up", sets: 4, reps: "6-10", rest: "120s" },
-    { name: "Barbell Row", sets: 3, reps: "8-10", rest: "90s" },
-    { name: "One-Arm Row", sets: 3, reps: "10-12", rest: "75s" },
-    { name: "Bicep Curl", sets: 4, reps: "10-15", rest: "60s" },
+    { name: "Pull-Up", sets: 4, reps: "6-8", rest: "150s" },
+    { name: "Barbell Row", sets: 4, reps: "6-10", rest: "120s" },
+    { name: "One-Arm Row", sets: 3, reps: "10-12", rest: "90s" },
+    { name: "Bicep Curl", sets: 3, reps: "10-12", rest: "75s" },
     { name: "Hammer Curl", sets: 3, reps: "10-12", rest: "60s" }
   ],
+
   legs: [
-    { name: "Squat", sets: 4, reps: "6-8", rest: "120s" },
+    { name: "Squat", sets: 4, reps: "5-8", rest: "150s" },
     { name: "Lunge", sets: 3, reps: "10-12", rest: "90s" },
-    { name: "Deadlift", sets: 3, reps: "5-8", rest: "150s" },
-    { name: "Leg Press", sets: 3, reps: "10-15", rest: "90s" },
+    { name: "Deadlift", sets: 3, reps: "5-6", rest: "180s" },
+    { name: "Leg Press", sets: 3, reps: "12-15", rest: "90s" },
     { name: "Calf Raise", sets: 4, reps: "15-20", rest: "60s" }
   ]
 };
