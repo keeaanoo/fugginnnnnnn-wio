@@ -313,6 +313,9 @@ function renderExercise() {
   // Update exercise name and details
   document.getElementById("exercise-name").textContent = exercise.name;
   document.getElementById("current-set").textContent = currentSet;
+  document.getElementById("target-sets").textContent = exercise.sets;
+  document.getElementById("target-sets-detail").textContent = exercise.sets;
+  document.getElementById("target-reps-display").textContent = exercise.reps;
   document.getElementById("target-reps").textContent = exercise.reps;
 
   // Update rest time display

@@ -255,11 +255,11 @@
                     <tr>
                       <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800"></th>
                       <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PUSH</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">REST</th>
                       <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PULL</th>
+                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">REST</th>
                       <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">LEGS</th>
                       <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">REST</th>
-                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PUSH</th>
-                      <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">PULL</th>
                       <th class="p-3 text-sm font-medium text-gray-400 bg-dark-800">REST</th>
                     </tr>
                   </thead>
@@ -317,8 +317,8 @@
                   <p class="text-sm font-medium text-gray-400 mb-2">CURRENT EXERCISE</p>
                   <div id="exercise-name" class="text-3xl font-bold mb-2">Bench Press</div>
                   <div class="text-gray-400">
-                    <span class="mr-4"><i class="fas fa-dumbbell mr-1"></i>3 sets</span>
-                    <span><i class="fas fa-redo mr-1"></i>8-12 reps</span>
+                    <span class="mr-4"><i class="fas fa-dumbbell mr-1"></i><span id="target-sets"></span> sets</span>
+                    <span><i class="fas fa-redo mr-1"></i><span id="target-reps-display"></span> reps</span>
                   </div>
                 </div>
                 
@@ -330,7 +330,11 @@
               <!-- Exercise Details -->
               <div class="glass-effect rounded-2xl p-5 mb-6">
                 <h3 class="font-bold mb-4">Exercise Details</h3>
-                <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                  <div>
+                    <p class="text-2xl font-bold gradient-text" id="target-sets-detail">4</p>
+                    <p class="text-xs text-gray-400">Target Sets</p>
+                  </div>
                   <div>
                     <p class="text-2xl font-bold gradient-text" id="current-set">1</p>
                     <p class="text-xs text-gray-400">Current Set</p>
